@@ -81,5 +81,11 @@ class NotificationService {
 }
 
 Future selectNotification(String? payload) async {
-  //handle your logic here
+  if (payload != null) {
+    print('notification payload: $payload');
+  }
+  // await Navigator.push(
+  //   context,
+  //   MaterialPageRoute<void>(builder: (context) => SecondScreen(payload)),
+  // );
 }
