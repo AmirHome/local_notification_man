@@ -2,6 +2,27 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+///           Guid        ////////////////////////////////////////////////
+/// - Install
+/// {flutter pub add flutter_local_notifications}
+///
+/// - Initial class by add blow line befor runApp() in main
+/// {NotificationService().init();}
+///
+/// - Declare variabel in state page by
+/// {NotificationService _notificationService = NotificationService();}
+///
+/// - Use methods showNotifications, scheduleNotifications like
+/// RaisedButton(
+///   child: Text('Show Notification'),
+///   padding: const EdgeInsets.all(10),
+///   onPressed: () async {
+///     await _notificationService.showNotifications(title:"Notification Title", message:"This is the Notification Body!");
+///   },
+/// ),
+///  ////////////////////////////////////////////////////////////////////////
+
+
 class NotificationService {
   //NotificationService a singleton object
   static final NotificationService _notificationService =
@@ -43,28 +64,28 @@ class NotificationService {
 
   AndroidNotificationDetails _androidNotificationDetails =
   AndroidNotificationDetails(
-    'channel ID',
-    'channel name',
+    'channelID',
+    'channelname',
     playSound: true,
     priority: Priority.high,
     importance: Importance.high,
   );
 
-  Future<void> showNotifications() async {
+  Future<void> showNotifications({int id=0, required String title, required String message}) async {
     await flutterLocalNotificationsPlugin.show(
-      0,
-      "Notification Title",
-      "This is the Notification Body!",
+      id,
+      title,
+      message,
       NotificationDetails(android: _androidNotificationDetails),
     );
   }
 
-  Future<void> scheduleNotifications() async {
+  Future<void> scheduleNotifications({int id=0, required String title, required String message}) async {
     await flutterLocalNotificationsPlugin.zonedSchedule(
-        0,
-        "Notification Title",
-        "This is the Notification Body!",
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 50)),
+        id,
+        title,
+        message,
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 7)),
         NotificationDetails(android: _androidNotificationDetails),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:

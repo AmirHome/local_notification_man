@@ -3,6 +3,7 @@ import 'notification_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  //Init in main
   NotificationService().init();
   runApp(MyApp());
 }
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text('Show Notification'),
                     padding: const EdgeInsets.all(10),
                     onPressed: () async {
-                      await _notificationService.showNotifications();
+                      await _notificationService.showNotifications(title:"Notification Title", message:"This is the Notification Body!");
                     },
                   ),
                   SizedBox(height: 3),
@@ -56,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text('Schedule Notification'),
                     padding: const EdgeInsets.all(10),
                     onPressed: () async {
-                      await _notificationService.scheduleNotifications();
+                      await _notificationService.scheduleNotifications(title:"Notification Title, waitting is ended.", message:"This is the Notification Body!");
                     },
                   ),
                   SizedBox(height: 3),
